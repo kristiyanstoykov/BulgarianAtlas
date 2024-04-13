@@ -6,16 +6,18 @@ import { FONT, SIZES } from "../../../constants";
 
 export default function Post({ image, title, content }) {
   const { width } = useWindowDimensions(); // To get the width of the device screen
-
+  const correctedImgUrl = image.replace("localhost", "10.0.2.2");
   const source = {
     html: content,
   };
-
+  console.log(image, title, content);
   return (
     <SafeAreaView style={styles.postContainer}>
       <Image
         source={
-          image ? { uri: image } : require("../../../assets/images/kemal.jpg")
+          image
+            ? { uri: correctedImgUrl }
+            : require("../../../assets/images/kemal.jpg")
         }
         style={styles.image}
       />
