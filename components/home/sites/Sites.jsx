@@ -26,7 +26,6 @@ export default function Sites() {
         }));
         setBetterData(prettierData);
       } catch (err) {
-        // console.error("Failed to fetch posts", err);
         setError("Failed to fetch posts. Please try again.");
       } finally {
         setIsLoading(false);
