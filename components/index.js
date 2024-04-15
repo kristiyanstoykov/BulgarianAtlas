@@ -1,7 +1,7 @@
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 
 // home screen
-import Site from "./home/site/Site";
+import Sites from "./home/sites/Sites";
 
 // job details screen
 // import Company from "./jobdetails/company/Company";
@@ -13,4 +13,4 @@ import Site from "./home/site/Site";
 // common
 // import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
 
-export { ScreenHeaderBtn, Site };
+export { ScreenHeaderBtn, Sites };
