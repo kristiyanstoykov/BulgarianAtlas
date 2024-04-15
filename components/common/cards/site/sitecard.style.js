@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginHorizontal: SIZES.medium,
   },
   siteName: {
-    fontSize: SIZES.medium,
+    fontSize: SIZES.large,
     fontFamily: FONT.bold,
     color: COLORS.tertiary,
   },
