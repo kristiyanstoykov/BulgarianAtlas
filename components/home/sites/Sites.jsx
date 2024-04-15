@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "expo-router";
 import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import axios from "axios";
 import SiteCard from "../../common/cards/site/SiteCard";
@@ -8,7 +9,7 @@ export default function Sites() {
   const [betterData, setBetterData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  // const router = useRouter();
+  const router = useRouter();
   useEffect(() => {
     const fetchAndProcessPosts = async () => {
       setIsLoading(true);
@@ -49,6 +50,7 @@ export default function Sites() {
               image={item.image}
               title={item.postTitle}
               content={item.postExcerpt}
+              handleNavigate={() => router.push(`/site-details/${item.postId}`)}
             />
           ))}
         </>

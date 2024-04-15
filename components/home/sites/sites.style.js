@@ -4,9 +4,9 @@ import { FONT, SIZES, COLORS } from "../../../constants";
 
 const styles = StyleSheet.create({
   postContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    marginBottom: 20,
+    backgroundColor: COLORS.lightWhite,
+    borderRadius: SIZES.small,
+    margin: SIZES.large,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.22,
