@@ -14,5 +14,8 @@ web-build/
 # VS code
 .vscode/
 
+# Some folder %ProgramData%
+%ProgramData%/
+
 # macOS
 .DS_Store
