@@ -1,32 +1,21 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, SHADOWS, SIZES } from "../../../../constants";
+import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: SIZES.xLarge,
+    padding: SIZES.large,
     marginBottom: SIZES.xLarge,
     borderRadius: SIZES.small,
     backgroundColor: "#FFF",
     ...SHADOWS.medium,
-    shadowColor: COLORS.white,
-  },
-  logoContainer: {
-    width: 50,
-    height: 50,
-    backgroundColor: COLORS.white,
-    borderRadius: SIZES.medium,
-    justifyContent: "center",
-    alignItems: "center",
+    shadowColor: COLORS.tertiary,
   },
   image: {
     width: "100%",
     height: 200, // Fixed height for images
     resizeMode: "cover",
-  },
-  logoImage: {
-    width: "70%",
-    height: "70%",
+    borderRadius: SIZES.small,
   },
   textContainer: {
     flex: 1,
@@ -34,13 +23,13 @@ const styles = StyleSheet.create({
   },
   siteName: {
     fontSize: SIZES.medium,
-    fontFamily: "DMBold",
-    color: COLORS.primary,
+    fontFamily: FONT.bold,
+    color: COLORS.tertiary,
   },
-  siteType: {
+  siteText: {
     fontSize: SIZES.small + 2,
-    fontFamily: "DMRegular",
-    color: COLORS.gray,
+    fontFamily: FONT.regular,
+    color: COLORS.black,
     marginTop: 3,
     textTransform: "capitalize",
   },
