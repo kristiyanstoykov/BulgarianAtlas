@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
-import { View, Text, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import axios from "axios";
 import SiteCard from "../../common/cards/site/SiteCard";
 import styles from "./sites.style";
