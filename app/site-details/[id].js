@@ -39,6 +39,7 @@ const SiteDetails = () => {
         };
         setBetterData(prettierData);
       } catch (err) {
+        // TODO remove console.log
         console.log(err);
         setError("Failed to fetch posts. Please try again.");
       } finally {
