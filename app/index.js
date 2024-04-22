@@ -3,31 +3,20 @@ import { Text, View, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { Stack } from "expo-router";
 import { SIZES, FONT, COLORS, icons, images } from "../constants";
 import { Sites, ScreenHeaderBtn } from "../components";
+import { useAuth } from "../context/AuthContext";
+import Login from "../components/login/Login";
 
 export default function Home() {
   return (
-    <SafeAreaView>
-      <Stack.Screen
-        options={{
-          headerStyle: { backgroundColor: COLORS.lightWhite },
-          headerShadowVisible: false,
-          headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
-          ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />
-          ),
-          headerTitle: "Home",
-          headerTitleAlign: "center",
-        }}
-      />
-      <ScrollView showsHorizontalScrollIndicator={true}>
-        <View style={styles.container}>
-          <Text style={styles.header}>Bulgarian culture</Text>
-          <Sites />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Login />
+    // <SafeAreaView>
+    //   <ScrollView showsHorizontalScrollIndicator={true}>
+    //     <View style={styles.container}>
+    //       <Text style={styles.header}>Bulgarian culture</Text>
+    //       <Sites />
+    //     </View>
+    //   </ScrollView>
+    // </SafeAreaView>
   );
 }
 
