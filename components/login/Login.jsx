@@ -3,6 +3,13 @@ import { Animated, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacit
 import { COLORS, FONT, SIZES } from "../../constants";
 import styles from "./login.style";
 
+const Tab = ({ isActive, label, onPress }) => (
+  <TouchableOpacity style={styles.tab} onPress={onPress}>
+    <Text style={[styles.tabText, isActive && styles.activeText]}>{label}</Text>
+    {isActive && <View style={[styles.underline]} />}
+  </TouchableOpacity>
+);
+
 const Login = () => {
   const [currentTab, setCurrentTab] = useState("login");
 
@@ -14,6 +21,7 @@ const Login = () => {
     login: new Animated.Value(1),
     signup: new Animated.Value(0.7),
   });
+
   const animateTab = (active, inactive) => {
     Animated.parallel([
       Animated.timing(scaleAnim[active], {
@@ -38,6 +46,7 @@ const Login = () => {
       }),
     ]).start();
   };
+
   const handleTabChange = (tab) => {
     setCurrentTab(tab);
     if (tab === "login") {
@@ -59,9 +68,7 @@ const Login = () => {
             },
           ]}
         >
-          <TouchableOpacity onPress={() => handleTabChange("login")}>
-            <Text style={styles.tabText}>LOGIN</Text>
-          </TouchableOpacity>
+          <Tab isActive={currentTab === "login"} label="LOGIN" onPress={() => handleTabChange("login")} />
         </Animated.View>
         <Animated.View
           style={[
@@ -72,9 +79,7 @@ const Login = () => {
             },
           ]}
         >
-          <TouchableOpacity onPress={() => handleTabChange("signup")}>
-            <Text style={styles.tabText}>SIGN UP</Text>
-          </TouchableOpacity>
+          <Tab isActive={currentTab === "signup"} label="SIGN UP" onPress={() => handleTabChange("signup")} />
         </Animated.View>
       </View>
       {currentTab === "login" && (
@@ -89,11 +94,6 @@ const Login = () => {
           >
             <Text style={styles.buttonText}>LOGIN</Text>
           </TouchableOpacity>
-          <View style={styles.forget}>
-            <TouchableOpacity onPress={() => setCurrentTab("forget")}>
-              <Text style={styles.linkText}>Forgot password?</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       )}
 
@@ -109,18 +109,6 @@ const Login = () => {
             }}
           >
             <Text style={styles.buttonText}>SIGN UP</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {currentTab === "forget" && (
-        <View style={styles.form}>
-          <Text style={styles.normalText}>
-            To reset your password enter your email we'll send you a link to reset your password.
-          </Text>
-          <TextInput style={styles.input} placeholder="EMAIL ADDRESS" placeholderTextColor="#708B75" />
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>RESET PASSWORD</Text>
           </TouchableOpacity>
         </View>
       )}

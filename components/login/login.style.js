@@ -12,27 +12,31 @@ export default StyleSheet.create({
   tabs: {
     marginTop: 20,
     flexDirection: "row",
-    backgroundColor: COLORS.tertiary,
-    borderRadius: 5,
-    opacity: 0.8,
     width: "100%",
   },
   tab: {
     flex: 1,
     padding: 10,
     alignItems: "center",
-    borderRightWidth: 1,
-    borderColor: "#FFF",
+    width: "100%",
   },
   tabText: {
-    color: COLORS.white,
+    color: COLORS.black,
     fontSize: 18,
+  },
+  activeText: {
+    fontWeight: "bold",
+  },
+  underline: {
+    padding: 1,
+    paddingHorizontal: 30,
+    backgroundColor: COLORS.black,
+    marginTop: 1,
   },
   form: {
     width: "100%",
     marginTop: 20,
     padding: 20,
-    backgroundColor: COLORS.primary,
     borderRadius: 5,
     opacity: 0.8,
   },
@@ -46,9 +50,12 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: COLORS.tertiary,
+    width: "50%",
     alignItems: "center",
+    alignSelf: "center",
     padding: 10,
+    backgroundColor: COLORS.tertiary,
+    borderRadius: 5,
   },
   buttonText: {
     color: COLORS.white,

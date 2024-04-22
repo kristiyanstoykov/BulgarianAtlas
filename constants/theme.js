@@ -1,7 +1,9 @@
 const COLORS = {
-  primary: "#6D071A",
-  secondary: "#cfb53b",
-  tertiary: "#0f4c81",
+  primary: "#222831",
+  secondary: "#31363F",
+  tertiary: "#76ABAE",
+  quaternary: "#EEEEEE",
+  warning: "#6D071A",
 
   primary2: "#312651",
   secondary2: "#444262",
@@ -53,4 +55,4 @@ const SHADOWS = {
   },
 };
 
-export { COLORS, FONT, SIZES, SHADOWS };
+export { COLORS, FONT, SHADOWS, SIZES };
