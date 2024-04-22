@@ -1,8 +1,8 @@
-import React from "react";
-import { Text, View, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { Stack } from "expo-router";
-import { SIZES, FONT, COLORS, icons, images } from "../constants";
-import { Sites, ScreenHeaderBtn } from "../components";
+import React from "react";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Login, ScreenHeaderBtn, Sites } from "../components";
+import { COLORS, FONT, SIZES, icons, images } from "../constants";
 
 export default function Home() {
   return (
@@ -11,12 +11,8 @@ export default function Home() {
         options={{
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
-          headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
-          ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />
-          ),
+          headerLeft: () => <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />,
+          headerRight: () => <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />,
           headerTitle: "Home",
           headerTitleAlign: "center",
         }}
@@ -24,7 +20,8 @@ export default function Home() {
       <ScrollView showsHorizontalScrollIndicator={true}>
         <View style={styles.container}>
           <Text style={styles.header}>Bulgarian culture</Text>
-          <Sites />
+          {/* <Sites /> */}
+          <Login />
         </View>
       </ScrollView>
     </SafeAreaView>
