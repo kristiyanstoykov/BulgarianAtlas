@@ -22,10 +22,10 @@ export default StyleSheet.create({
   },
   tabText: {
     color: COLORS.black,
-    fontSize: 18,
+    fontSize: SIZES.medium,
   },
   activeText: {
-    fontWeight: "bold",
+    fontWeight: FONT.bold,
   },
   underline: {
     padding: 1,
@@ -48,18 +48,26 @@ export default StyleSheet.create({
     height: 40,
     marginBottom: 20,
     paddingHorizontal: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   button: {
     width: "50%",
     alignItems: "center",
     alignSelf: "center",
     padding: 10,
-    backgroundColor: COLORS.tertiary,
+    backgroundColor: COLORS.secondary,
     borderRadius: 5,
   },
   buttonText: {
     color: COLORS.white,
-    fontSize: 16,
+    fontSize: SIZES.medium,
   },
   forget: {
     flexDirection: "row",
