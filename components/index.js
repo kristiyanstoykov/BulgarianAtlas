@@ -2,7 +2,7 @@ import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 
 // home screen
 import Sites from "./home/sites/Sites";
-import Login from "./login/Login";
+import Login from "./login_1/Login";
 
 // job details screen
 // import Company from "./jobdetails/company/Company";
