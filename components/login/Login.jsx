@@ -1,68 +1,54 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  Animated,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { COLORS, FONT, SIZES } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
+import LoginTab from "./LoginTab";
+import SigninTab from "./SigninTab";
+import TabSelector from "./TabSelector";
+import styles from "./login.style";
+
+const Tab = ({ isActive, label, onPress }) => (
+  <TouchableOpacity style={styles.tab} onPress={onPress}>
+    <Text style={[styles.tabText, isActive && styles.activeText]}>{label}</Text>
+    {isActive && <View style={[styles.underline]} />}
+  </TouchableOpacity>
+);
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { onLogin, authState } = useAuth();
+  const [currentTab, setCurrentTab] = useState("login");
 
-  const onSignInPress = async () => {
-    onLogin(username, password);
-  };
+  const [scaleAnim] = useState({
+    login: new Animated.Value(1.1),
+    signup: new Animated.Value(1),
+  });
+  const [opacityAnim] = useState({
+    login: new Animated.Value(1),
+    signup: new Animated.Value(0.7),
+  });
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
-      <Text style={styles.header}>My Epic App</Text>
-      <TextInput
-        autoCapitalize="none"
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        style={styles.inputField}
+      <Text style={styles.header}>Bulgarian Atlas</Text>
+      <TabSelector
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+        scaleAnim={scaleAnim}
+        opacityAnim={opacityAnim}
       />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-        style={styles.inputField}
-      />
+      {currentTab === "login" && <LoginTab />}
 
-      <TouchableOpacity onPress={onSignInPress} style={styles.button}>
-        <Text style={{ color: "#fff" }}>Sign in</Text>
-      </TouchableOpacity>
+      {currentTab === "signup" && <SigninTab onSuccessfulSignin={() => setCurrentTab("login")} />}
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    paddingHorizontal: "20%",
-    justifyContent: "center",
-  },
-  header: {
-    fontSize: 30,
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  inputField: {
-    marginVertical: 4,
-    height: 50,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
-    padding: 10,
-  },
-  button: {
-    marginVertical: 15,
-    alignItems: "center",
-    backgroundColor: "#111233",
-    padding: 12,
-    borderRadius: 4,
-  },
-});
 
 export default Login;
