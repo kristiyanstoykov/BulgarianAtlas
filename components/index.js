@@ -14,4 +14,4 @@ import Tabs from "./profile/tabs/Tabs";
 // common
 // import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
 
-export { Login, Login_1, MySites, ScreenHeaderBtn, SiteCard, Sites, Tabs, WithRole, WithoutRole };
+export { Details, Login, Login_1, MySites, ScreenHeaderBtn, SiteCard, Sites, Tabs, WithRole, WithoutRole };
