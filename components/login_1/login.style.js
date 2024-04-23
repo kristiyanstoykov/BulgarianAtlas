@@ -9,6 +9,12 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: 5,
   },
+  header: {
+    fontSize: 30,
+    fontFamily: FONT.bold,
+    textAlign: "center",
+    marginBottom: 40,
+  },
   tabs: {
     marginTop: 20,
     flexDirection: "row",

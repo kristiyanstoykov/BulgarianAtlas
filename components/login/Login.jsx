@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Text,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
@@ -19,10 +12,7 @@ const Login = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
       <Text style={styles.header}>My Epic App</Text>
       <TextInput
         autoCapitalize="none"
