@@ -10,18 +10,12 @@ const LoginTab = () => {
   const [password, setPassword] = useState("");
   const { onLogin } = useAuth();
 
-  const { validateEmail, emailError } = useEmailValidation();
   const { validateFields, fieldErrors } = useRequiredFieldsValidation();
 
   const handleLoginPress = async () => {
     const fields = { email, password };
     if (!validateFields(fields)) {
       Alert.alert("Error", "All fields are required.");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      Alert.alert("Please, enter a valid email address!", emailError);
       return;
     }
 
@@ -37,7 +31,7 @@ const LoginTab = () => {
     <View style={styles.form}>
       <TextInput
         autoCapitalize="none"
-        placeholder="Email"
+        placeholder="Username / Email"
         value={email}
         onChangeText={setEmail}
         placeholderTextColor="black"
