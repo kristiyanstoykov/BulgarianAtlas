@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useEmailValidation, usePasswordValidation, useRequiredFieldsValidation } from "./FormValidation";
 import styles from "./login.style";
 
-const SigninTab = () => {
+const SigninTab = ({ onSuccessfulSignin }) => {
   const { validateEmail, emailError } = useEmailValidation();
   const { validateFields, fieldErrors } = useRequiredFieldsValidation();
   const { validatePasswords, passwordError } = usePasswordValidation();
@@ -41,6 +41,7 @@ const SigninTab = () => {
     // If all checks pass, proceed with the signup
     try {
       await onRegister(name, lastname, email, password);
+      onSuccessfulSignin();
     } catch (error) {
       console.error("Signup failed:", error);
       Alert.alert("Error", "Signup failed. Please try again.");
