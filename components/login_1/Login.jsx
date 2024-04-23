@@ -46,7 +46,7 @@ const Login = () => {
       />
       {currentTab === "login" && <LoginTab />}
 
-      {currentTab === "signup" && <SigninTab />}
+      {currentTab === "signup" && <SigninTab onSuccessfulSignin={() => setCurrentTab("login")} />}
     </KeyboardAvoidingView>
   );
 };
