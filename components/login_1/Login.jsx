@@ -25,7 +25,6 @@ const Tab = ({ isActive, label, onPress }) => (
 
 const Login = () => {
   const [currentTab, setCurrentTab] = useState("login");
-  const { onLogin, authState } = useAuth();
 
   const [scaleAnim] = useState({
     login: new Animated.Value(1.1),
