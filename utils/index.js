@@ -1,5 +1,4 @@
-export default function stripHtmlTags(str) {
-  if (str === null || str === "") return false;
-  else str = str.toString();
-  return str.replace(/<[^>]*>/g, ""); // Regular expression to remove HTML tags
-}
+import stripHtmlTags from "./stripHtmlTags";
+import getMimeType from "./getMimeType";
+
+export { stripHtmlTags, getMimeType };

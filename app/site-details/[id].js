@@ -11,7 +11,7 @@ import axios from "axios";
 import { Stack, useRouter, useLocalSearchParams } from "expo-router";
 import { ScreenHeaderBtn } from "../../components";
 import { FONT, COLORS, icons, SIZES } from "../../constants";
-import stripHtmlTags from "../../utils";
+import { stripHtmlTags } from "../../utils";
 
 const SiteDetails = () => {
   const [betterData, setBetterData] = useState([]);
@@ -39,6 +39,7 @@ const SiteDetails = () => {
         };
         setBetterData(prettierData);
       } catch (err) {
+        // TODO remove console.log
         console.log(err);
         setError("Failed to fetch posts. Please try again.");
       } finally {
@@ -79,7 +80,7 @@ const SiteDetails = () => {
             source={
               betterData.image
                 ? { uri: betterData.image.replace("localhost", "10.0.2.2") }
-                : require("../../assets/images/default-museum.jpg")
+                : require("../../assets/images/image_placeholder.jpg")
             }
             style={{ width: "100%", height: 200 }} // Set your desired image style
           />

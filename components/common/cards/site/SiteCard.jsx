@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import styles from "./sitecard.style";
-import stripHtmlTags from "../../../../utils";
+import { stripHtmlTags } from "../../../../utils";
 
 export default function SiteCard({ image, title, content, handleNavigate }) {
   const correctedImgUrl = image.replace("localhost", "10.0.2.2");
