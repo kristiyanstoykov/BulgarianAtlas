@@ -1,3 +1,4 @@
 import stripHtmlTags from "./stripHtmlTags";
+import getMimeType from "./getMimeType";
 
-export default stripHtmlTags;
+export { stripHtmlTags, getMimeType };
