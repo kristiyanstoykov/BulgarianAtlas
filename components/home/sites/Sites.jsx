@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "expo-router";
-import { View, Text, ActivityIndicator } from "react-native";
 import axios from "axios";
+import { useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
 import SiteCard from "../../common/cards/site/SiteCard";
 import styles from "./sites.style";
 
@@ -14,9 +14,7 @@ export default function Sites() {
     const fetchAndProcessPosts = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          "http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/posts?per_page=10&_embed"
-        );
+        const response = await axios.get("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts?per_page=10&_embed");
         const prettierData = response.data.map((post) => ({
           postId: post.id,
           postLink: post.link,
