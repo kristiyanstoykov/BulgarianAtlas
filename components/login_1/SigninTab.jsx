@@ -1,10 +1,11 @@
 // SignIn.js
 import React, { useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useAuth } from "../../context/AuthContext";
 import { useEmailValidation, usePasswordValidation, useRequiredFieldsValidation } from "./FormValidation";
 import styles from "./login.style";
 
-const SigninTab = ({ onLogin }) => {
+const SigninTab = () => {
   const { validateEmail, emailError } = useEmailValidation();
   const { validateFields, fieldErrors } = useRequiredFieldsValidation();
   const { validatePasswords, passwordError } = usePasswordValidation();
@@ -14,6 +15,7 @@ const SigninTab = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { onRegister } = useAuth();
 
   const handleSignupPress = async () => {
     const fields = { name, lastname, email, password, confirmPassword };
@@ -38,8 +40,7 @@ const SigninTab = ({ onLogin }) => {
 
     // If all checks pass, proceed with the signup
     try {
-      await onSignup(email, password); // Assuming `onSignup` is your signup function
-      console.log("Signup successful!");
+      await onRegister(name, lastname, email, password);
     } catch (error) {
       console.error("Signup failed:", error);
       Alert.alert("Error", "Signup failed. Please try again.");
