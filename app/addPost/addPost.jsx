@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  Alert,
-  TextInput,
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Image,
-  ScrollView,
-} from "react-native";
-import { ScreenHeaderBtn } from "../../components";
-import { FONT, COLORS, icons, SIZES } from "../../constants";
-import { Stack, useRouter } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
+import * as ImagePicker from "expo-image-picker";
+import { Stack, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Alert, Button, Image, SafeAreaView, ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { ScreenHeaderBtn } from "../../components";
+import { COLORS, FONT, SIZES, icons } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
 import { getMimeType } from "../../utils";
 
@@ -63,16 +54,12 @@ export default function AddPost() {
     });
 
     try {
-      const response = await axios.post(
-        "http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/media",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${authState.token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/media", formData, {
+        headers: {
+          Authorization: `Bearer ${authState.token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log("Image uploaded successfully with ID:", response);
       return response.data.id; // Returns the ID of the uploaded media
     } catch (error) {
@@ -91,15 +78,11 @@ export default function AddPost() {
 
     console.log("auth", authState);
     try {
-      const response = await axios.post(
-        "http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/posts",
-        postData,
-        {
-          headers: {
-            Authorization: `Bearer ${authState.token}`, // Again, use your actual access token
-          },
-        }
-      );
+      const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts", postData, {
+        headers: {
+          Authorization: `Bearer ${authState.token}`, // Again, use your actual access token
+        },
+      });
       console.log("Post created successfully with ID:", response.data.id);
     } catch (error) {
       console.error("Error creating post:", error);
@@ -126,13 +109,7 @@ export default function AddPost() {
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
           headerBackVisible: false,
-          headerLeft: () => (
-            <ScreenHeaderBtn
-              iconUrl={icons.left}
-              dimension="60%"
-              handlePress={() => router.back()}
-            />
-          ),
+          headerLeft: () => <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" handlePress={() => router.back()} />,
           headerTitle: "Add post",
         }}
       />
@@ -143,19 +120,11 @@ export default function AddPost() {
           {image ? (
             <Image source={{ uri: image }} style={styles.image} />
           ) : (
-            <Image
-              source={require("../../assets/images/image_placeholder.jpg")}
-              style={styles.image}
-            />
+            <Image source={require("../../assets/images/image_placeholder.jpg")} style={styles.image} />
           )}
         </View>
         <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            value={title}
-            onChangeText={setTitle}
-          />
+          <TextInput style={styles.input} placeholder="Title" value={title} onChangeText={setTitle} />
           <TextInput
             style={styles.input}
             placeholder="Content"
