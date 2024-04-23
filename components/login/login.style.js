@@ -25,7 +25,7 @@ export default StyleSheet.create({
     fontSize: SIZES.medium,
   },
   activeText: {
-    fontWeight: FONT.bold,
+    fontFamily: FONT.bold,
   },
   underline: {
     padding: 1,
