@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
 import { Alert } from "react-native";
-import stripHtmlTags from "../utils";
+import { stripHtmlTags } from "../utils";
 
-const ROLES = {
+export const ROLES = {
   ADMIN: "administrator",
   EDITOR: "editor",
   USER: "subscriber",
