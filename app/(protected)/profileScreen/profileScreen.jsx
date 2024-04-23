@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, Button } from "react-native";
-import { useAuth, ROLES } from "../../../context/AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { SIZES } from "../../../constants";
 import axios from "axios";
 import { useRouter } from "expo-router";
-import { WithRole, Tabs, Details, MySites } from "../../../components";
+import React, { useEffect, useState } from "react";
+import { Button, ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Details, MySites, Tabs, WithRole } from "../../../components";
+import { SIZES } from "../../../constants";
+import { ROLES, useAuth } from "../../../context/AuthContext";
 
 export default function ProfileScreen() {
   const { authState, onLogout } = useAuth();
@@ -22,13 +22,7 @@ export default function ProfileScreen() {
       case "About":
         return <Details />;
       case "My sites":
-        return (
-          <MySites
-            betterData={betterData}
-            isLoading={isLoading}
-            error={error}
-          />
-        );
+        return <MySites betterData={betterData} isLoading={isLoading} error={error} />;
     }
   };
 
@@ -37,7 +31,7 @@ export default function ProfileScreen() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/posts?author=${authState.user_id}&_embed`
+          `https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts?author=${authState.user_id}&_embed`
         );
         const prettierData = response.data.map((post) => ({
           postId: post.id,
@@ -71,16 +65,10 @@ export default function ProfileScreen() {
             }}
           />
           <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
-            <Button
-              title="Add Post"
-              onPress={() => router.push("/addPost/addPost")}
-            />
+            <Button title="Add Post" onPress={() => router.push("/addPost/addPost")} />
           </WithRole>
           <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
-            <Button
-              title="Add image"
-              onPress={() => router.push("/addPost/imagePicker")}
-            />
+            <Button title="Add image" onPress={() => router.push("/addPost/imagePicker")} />
           </WithRole>
 
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
