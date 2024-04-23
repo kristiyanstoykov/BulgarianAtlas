@@ -1,10 +1,12 @@
 import { Stack } from "expo-router";
-import { ScreenHeaderBtn, Sites } from "../components";
+
+import { Login, Login_1, ScreenHeaderBtn, Sites } from "../components";
 import { COLORS, FONT, SIZES, icons, images } from "../constants";
 
 export default function Home() {
   return (
-    <Login />
+    // <Login />
+    <Login_1 />
     // <SafeAreaView>
     //   <ScrollView showsHorizontalScrollIndicator={true}>
     //     <View style={styles.container}>
@@ -15,20 +17,3 @@ export default function Home() {
     // </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    padding: 20,
-    overflow: "hidden",
-  },
-  header: {
-    fontSize: SIZES.xLarge,
-    fontFamily: FONT.bold,
-  },
-  error: {
-    color: "red",
-  },
-});
