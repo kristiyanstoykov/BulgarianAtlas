@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  ScrollView,
-  Text,
-  Image,
-  ActivityIndicator,
-} from "react-native";
 import axios from "axios";
-import { Stack, useRouter, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Image, SafeAreaView, ScrollView, Text, View } from "react-native";
 import { ScreenHeaderBtn } from "../../components";
-import { FONT, COLORS, icons, SIZES } from "../../constants";
+import { COLORS, FONT, SIZES, icons } from "../../constants";
 import { stripHtmlTags } from "../../utils";
 
 const SiteDetails = () => {
@@ -25,9 +18,7 @@ const SiteDetails = () => {
     const fetchAndProcessPosts = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          `http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/posts/${params.id}?_embed`
-        );
+        const response = await axios.get(`https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts/${params.id}?_embed`);
         const prettierData = {
           postId: params.id,
           postTitle: response.data["title"]["rendered"], // Assuming title is an object with a rendered property
@@ -57,16 +48,8 @@ const SiteDetails = () => {
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
           headerBackVisible: false,
-          headerLeft: () => (
-            <ScreenHeaderBtn
-              iconUrl={icons.left}
-              dimension="60%"
-              handlePress={() => router.back()}
-            />
-          ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
-          ),
+          headerLeft: () => <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" handlePress={() => router.back()} />,
+          headerRight: () => <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />,
           headerTitle: "",
         }}
       />
@@ -84,12 +67,8 @@ const SiteDetails = () => {
             }
             style={{ width: "100%", height: 200 }} // Set your desired image style
           />
-          <Text style={{ fontFamily: FONT.bold, fontSize: SIZES.large }}>
-            {betterData.postTitle}
-          </Text>
-          <Text style={{ fontFamily: FONT.regular }}>
-            {betterData.postContent}
-          </Text>
+          <Text style={{ fontFamily: FONT.bold, fontSize: SIZES.large }}>{betterData.postTitle}</Text>
+          <Text style={{ fontFamily: FONT.regular }}>{betterData.postContent}</Text>
         </ScrollView>
       ) : (
         <Text>No post found.</Text>
