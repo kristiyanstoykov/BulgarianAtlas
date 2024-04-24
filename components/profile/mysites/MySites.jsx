@@ -2,10 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useAuth, ROLES } from "../../../context/AuthContext";
 import { FONT, SIZES, COLORS } from "../../../constants";
-import { SiteCard } from "../../";
+import SiteCard from "../../common/cards/site/SiteCard";
+import { useRouter } from "expo-router";
 
 export default function MySites({ betterData, isLoading, error }) {
   const { authState } = useAuth();
+  const router = useRouter();
   return (
     <>
       <Text style={{ fontFamily: FONT.bold, fontSize: SIZES.large }}>
@@ -24,6 +26,7 @@ export default function MySites({ betterData, isLoading, error }) {
                 image={item.image}
                 title={item.postTitle}
                 content={item.postExcerpt}
+                google_maps_link={item.google_maps_link}
                 handleNavigate={() =>
                   router.push(`/site-details/${item.postId}`)
                 }

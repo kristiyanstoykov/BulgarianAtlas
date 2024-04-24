@@ -1,19 +1,76 @@
-import axios from "axios";
-import * as ImagePicker from "expo-image-picker";
 import { Stack, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Alert, Button, Image, SafeAreaView, ScrollView, StyleSheet, TextInput, View } from "react-native";
+
+//Images
+import * as ImagePicker from "expo-image-picker";
+
+// Components
 import { ScreenHeaderBtn } from "../../components";
 import { COLORS, FONT, SIZES, icons } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
-import { getMimeType } from "../../utils";
+
+// Requests
+import axios from "axios";
+
+// Utilities
+import { checkFile, getFileNameFromUri, getMimeType } from "../../utils";
+
+// Maps
+import * as Location from "expo-location";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 export default function AddPost() {
   const { authState } = useAuth();
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [mapsLink, setMapsLink] = useState("");
   const [image, setImage] = useState(null);
+  const [region, setRegion] = useState(null);
+  const [marker, setMarker] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+      const initialRegion = {
+        latitude,
+        longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      };
+      setRegion(initialRegion);
+      setMapsLink(`https://www.google.com/maps?q=${latitude},${longitude}`);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!region) return;
+    setMarker({ latitude: region.latitude, longitude: region.longitude });
+  }, [region]);
+
+  const onMapPress = (e) => {
+    const coords = e.nativeEvent.coordinate;
+    setMarker(coords);
+    setMapsLink(`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`);
+  };
+
+  const onPoiClick = (e) => {
+    const { latitude, longitude } = e.nativeEvent.coordinate;
+    setMarker({
+      latitude: latitude,
+      longitude: longitude,
+    });
+    setMapsLink(`https://www.google.com/maps?q=${latitude},${longitude}`);
+    Alert.alert("POI Selected", `You have selected: ${e.nativeEvent.name}`);
+  };
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -23,8 +80,6 @@ export default function AddPost() {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -50,22 +105,40 @@ export default function AddPost() {
 
     formData.append("file", {
       uri: imageUri,
-      type: `image/${getMimeType(imageUri)}`,
+      type: `${getMimeType(imageUri)}`,
+      name: getFileNameFromUri(imageUri),
     });
 
     try {
-      const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/media", formData, {
+      const response = await fetch("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/media", {
+        method: "POST",
+        body: formData,
         headers: {
           Authorization: `Bearer ${authState.token}`,
-          "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Image uploaded successfully with ID:", response);
-      return response.data.id; // Returns the ID of the uploaded media
+      const responseJson = await response.json();
+      return responseJson.id; // Or other relevant response detail
     } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
+      console.error("Fetch upload error:", error);
+      Alert.alert("Failed to upload image. Please try again.");
     }
+  };
+
+  checkToken = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${authState.token}`,
+      };
+
+      const response = await axios.post(
+        "https://bulgarian-atlas.nst.bg/wp-json/jwt-auth/v1/token/validate",
+        {},
+        {
+          headers,
+        }
+      );
+    } catch (error) {}
   };
 
   const createPostWithFeaturedImage = async (title, content, mediaId) => {
@@ -74,22 +147,30 @@ export default function AddPost() {
       content: content,
       status: "publish",
       featured_media: mediaId,
+      acf: {
+        "google-link-field": mapsLink,
+      },
     };
 
-    console.log("auth", authState);
+    const headers = {
+      Authorization: `Bearer ${authState.token}`,
+    };
+
     try {
       const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts", postData, {
-        headers: {
-          Authorization: `Bearer ${authState.token}`, // Again, use your actual access token
-        },
+        headers,
       });
-      console.log("Post created successfully with ID:", response.data.id);
+      // TODO remove
+      //console.log("Post created successfully with ID:", response.data.id);
+      Alert.alert("Success", "Post successfully created", [{ text: "OK", onPress: () => router.back() }]);
     } catch (error) {
       console.error("Error creating post:", error);
+      Alert.alert("Failed to upload post. Please try again.");
     }
   };
 
   const handleCreatePost = async (title, content, imageUri) => {
+    //checkToken();
     const mediaId = await uploadImage(imageUri);
     if (mediaId) {
       await createPostWithFeaturedImage(title, content, mediaId);
@@ -134,7 +215,28 @@ export default function AddPost() {
             numberOfLines={10} // Adjust the number of lines accordingly
             textAlignVertical="top"
           />
+          <TextInput
+            style={styles.input}
+            placeholder="Google Link to site"
+            value={mapsLink}
+            onChangeText={setMapsLink}
+          />
           <Button title="Add Post" onPress={uploadPost} />
+          <View style={{ marginTop: 20 }}>
+            {marker && (
+              <MapView
+                style={{ width: "100%", height: 400 }}
+                initialRegion={region}
+                onPress={onMapPress}
+                onPoiClick={onPoiClick}
+                provider={PROVIDER_GOOGLE}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
+              >
+                <Marker coordinate={marker} />
+              </MapView>
+            )}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

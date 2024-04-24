@@ -10,6 +10,7 @@ export default function Sites() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+
   useEffect(() => {
     const fetchAndProcessPosts = async () => {
       setIsLoading(true);
@@ -21,6 +22,7 @@ export default function Sites() {
           postTitle: post.title.rendered, // Assuming title is an object with a rendered property
           postExcerpt: post.excerpt.rendered, // Same assumption as above
           image: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? "", // Safe access to possibly undefined properties
+          google_maps_link: post.acf ? post.acf["google_maps_link"] ?? "" : "", // Safe access to possibly undefined properties
         }));
         setBetterData(prettierData);
       } catch (err) {
@@ -47,6 +49,7 @@ export default function Sites() {
               image={item.image}
               title={item.postTitle}
               content={item.postExcerpt}
+              google_maps_link={item.google_maps_link}
               handleNavigate={() => router.push(`/site-details/${item.postId}`)}
             />
           ))}

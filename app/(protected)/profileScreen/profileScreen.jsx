@@ -67,9 +67,6 @@ export default function ProfileScreen() {
           <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
             <Button title="Add Post" onPress={() => router.push("/addPost/addPost")} />
           </WithRole>
-          <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
-            <Button title="Add image" onPress={() => router.push("/addPost/imagePicker")} />
-          </WithRole>
 
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           {displayTabContent()}

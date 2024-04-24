@@ -4,8 +4,17 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-image-picker"],
+    "plugins": [
+      "expo-router",
+      "expo-image-picker"
+    ],
     "name": "BulgarianAtlas",
-    "slug": "BulgarianAtlas"
+    "slug": "BulgarianAtlas",
+    "android": {
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.BulgarianAtlas"
+    }
   }
 }
