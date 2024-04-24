@@ -37,7 +37,7 @@ export default function ProfileScreen() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/posts?author=${authState.user_id}&_embed`
+          `https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts?author=${authState.user_id}&_embed`
         );
         const prettierData = response.data.map((post) => ({
           postId: post.id,
@@ -74,12 +74,6 @@ export default function ProfileScreen() {
             <Button
               title="Add Post"
               onPress={() => router.push("/addPost/addPost")}
-            />
-          </WithRole>
-          <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
-            <Button
-              title="Add image"
-              onPress={() => router.push("/addPost/imagePicker")}
             />
           </WithRole>
 
