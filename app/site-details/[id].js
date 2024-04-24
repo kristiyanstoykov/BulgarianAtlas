@@ -26,7 +26,7 @@ const SiteDetails = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://10.0.2.2/bulgarian-atlas/wp-json/wp/v2/posts/${params.id}?_embed`
+          `https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts/${params.id}?_embed`
         );
         const prettierData = {
           postId: params.id,
