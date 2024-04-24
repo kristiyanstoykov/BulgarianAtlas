@@ -24,6 +24,11 @@ const COLORS = {
     light: "#A50F2A",
     dark: "#4A0A16",
   },
+  success: {
+    default: "#007E33",
+    light: "#00C853",
+    dark: "#005005",
+  },
   primary2: {
     default: "#312651",
     light: "#4D3D6B",
