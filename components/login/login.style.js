@@ -49,7 +49,7 @@ export default StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#a0b3b0",
-    backgroundColor: COLORS.quaternary,
+    backgroundColor: COLORS.quaternary.default,
     color: "black",
     height: 40,
     marginBottom: 20,
@@ -68,7 +68,7 @@ export default StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     padding: 10,
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.secondary.default,
     borderRadius: 5,
   },
   buttonText: {
