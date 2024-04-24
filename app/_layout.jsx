@@ -1,7 +1,7 @@
-import { Stack, useRouter, useSegments } from "expo-router";
-import { AuthProvider, useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
 import { useFonts } from "expo-font";
+import { Stack, useRouter, useSegments } from "expo-router";
+import { useEffect } from "react";
+import { AuthProvider, useAuth } from "../context/AuthContext";
 
 const StackLayout = () => {
   const { authState } = useAuth();
@@ -22,6 +22,10 @@ const StackLayout = () => {
       router.replace("/(protected)/");
     }
   }, [authState, fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return;
+  }
 
   return (
     <Stack>

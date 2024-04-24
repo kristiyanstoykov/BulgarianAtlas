@@ -8,6 +8,7 @@ import { Details, Sites, Tabs, WithRole } from "../../../components";
 import { SIZES } from "../../../constants";
 import { ROLES, useAuth } from "../../../context/AuthContext";
 import { fetchMySites } from "../../../hooks/fetchMySites";
+import styles from "../../../styles/profileScreen.style";
 
 export default function ProfileScreen() {
   const { authState, onLogout } = useAuth();

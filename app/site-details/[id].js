@@ -1,20 +1,7 @@
 import axios from "axios";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { default as React, default as React, useEffect, useEffect, useState, useState } from "react";
-import {
-  ActivityIndicator,
-  Button,
-  Image,
-  Image,
-  Linking,
-  SafeAreaView,
-  SafeAreaView,
-  ScrollView,
-  ScrollView,
-  Text,
-  Text,
-  View,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Button, Image, Linking, SafeAreaView, ScrollView, Text, View } from "react-native";
 import { ScreenHeaderBtn } from "../../components";
 import { COLORS, FONT, SIZES, icons } from "../../constants";
 import { stripHtmlTags } from "../../utils";
