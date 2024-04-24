@@ -1,6 +1,19 @@
+import { AntDesign } from "@expo/vector-icons";
+
 import { Stack, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Image, SafeAreaView, ScrollView, StyleSheet, TextInput, View } from "react-native";
+import {
+  Alert,
+  Button,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 //Images
 import * as ImagePicker from "expo-image-picker";
@@ -9,6 +22,7 @@ import * as ImagePicker from "expo-image-picker";
 import { ScreenHeaderBtn } from "../../components";
 import { COLORS, FONT, SIZES, icons } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
+import styles from "./addPost.style";
 
 // Requests
 import axios from "axios";
@@ -184,7 +198,7 @@ export default function AddPost() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+    <SafeAreaView>
       <Stack.Screen
         options={{
           headerStyle: { backgroundColor: COLORS.lightWhite },
@@ -194,38 +208,39 @@ export default function AddPost() {
           headerTitle: "Add post",
         }}
       />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.imageContainer}>
-          <Button title="Pick an image from camera roll" onPress={pickImage} />
-          <Button title="Capture an image from camera" onPress={captureImage} />
           {image ? (
             <Image source={{ uri: image }} style={styles.image} />
           ) : (
             <Image source={require("../../assets/images/image_placeholder.jpg")} style={styles.image} />
           )}
+          <View style={styles.cameraBtnContainer}>
+            <TouchableOpacity style={styles.cameraButton} onPress={pickImage}>
+              <AntDesign name="picture" size={24} color="white" />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.cameraButton} onPress={captureImage}>
+              <AntDesign name="camerao" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
+
         <View style={styles.container}>
-          <TextInput style={styles.input} placeholder="Title" value={title} onChangeText={setTitle} />
+          <TextInput style={styles.input} placeholder="Заглавие" value={title} onChangeText={setTitle} />
           <TextInput
             style={styles.input}
-            placeholder="Content"
+            placeholder="Съдържание"
             value={content}
             onChangeText={setContent}
             multiline={true}
-            numberOfLines={10} // Adjust the number of lines accordingly
+            numberOfLines={10}
             textAlignVertical="top"
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Google Link to site"
-            value={mapsLink}
-            onChangeText={setMapsLink}
-          />
-          <Button title="Add Post" onPress={uploadPost} />
-          <View style={{ marginTop: 20 }}>
+          <View style={styles.mapsContainer}>
             {marker && (
               <MapView
-                style={{ width: "100%", height: 400 }}
+                style={styles.mapView}
                 initialRegion={region}
                 onPress={onMapPress}
                 onPoiClick={onPoiClick}
@@ -237,31 +252,11 @@ export default function AddPost() {
               </MapView>
             )}
           </View>
+          <TouchableOpacity style={styles.addPost} title="Добави" onPress={uploadPost}>
+            <Text style={styles.addPostText}>Добави</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-  },
-  input: {
-    marginBottom: 20,
-    borderWidth: 1,
-    padding: 10,
-    borderColor: "#ccc",
-  },
-  imageContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  image: {
-    width: 300,
-    height: 225,
-  },
-});
