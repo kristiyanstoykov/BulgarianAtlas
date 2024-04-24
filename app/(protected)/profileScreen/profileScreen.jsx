@@ -1,11 +1,12 @@
+import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Button, ScrollView, Text, View } from "react-native";
+import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Details, MySites, Tabs, WithRole } from "../../../components";
-import { SIZES } from "../../../constants";
 import { ROLES, useAuth } from "../../../context/AuthContext";
+import styles from "../../../styles/profileScreen.style";
 
 export default function ProfileScreen() {
   const { authState, onLogout } = useAuth();
@@ -55,19 +56,24 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView>
-      <SafeAreaView style={{ padding: SIZES.medium }}>
+      <SafeAreaView style={styles.container}>
         <View>
-          <Button
-            title="Logout"
-            color="red" // You can style this as you like
-            onPress={() => {
-              onLogout(); // Call the logout function
-            }}
-          />
-          <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
-            <Button title="Add Post" onPress={() => router.push("/addPost/addPost")} />
-          </WithRole>
-
+          {/* TODO: Fix button to be on right side when not admin */}
+          <View style={[styles.btnContainer, (!ROLES.ADMIN || !ROLES.EDITOR) && styles.alignRight]}>
+            <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
+              <TouchableOpacity onPress={() => router.push("/addPost/addPost")} style={styles.btnAddPost}>
+                <AntDesign name="pluscircleo" size={24} color="white" />
+              </TouchableOpacity>
+            </WithRole>
+            <TouchableOpacity
+              style={styles.btnLogout}
+              onPress={() => {
+                onLogout();
+              }}
+            >
+              <AntDesign name="logout" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           {displayTabContent()}
         </View>
