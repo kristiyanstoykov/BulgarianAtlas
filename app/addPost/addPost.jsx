@@ -162,7 +162,7 @@ export default function AddPost() {
       status: "publish",
       featured_media: mediaId,
       acf: {
-        "google-maps-link": mapsLink,
+        "google-link-field": mapsLink,
       },
     };
 
