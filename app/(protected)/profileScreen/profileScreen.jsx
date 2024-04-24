@@ -19,6 +19,9 @@ export default function ProfileScreen() {
   const router = useRouter();
 
   const tabs = ["My sites", "About"];
+  if (ROLES.USER == authState.role) {
+    tabs.shift();
+  }
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const displayTabContent = () => {
@@ -38,13 +41,11 @@ export default function ProfileScreen() {
     setRefreshing(true);
     fetchMySites(authState.user_id, setBetterData, setIsLoading, setError).finally(() => setRefreshing(false));
   }, []);
-
   return (
     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-      <SafeAreaView style={{ padding: SIZES.medium }}>
+      <View style={styles.safeAreaView}>
         <View>
-          {/* TODO: Fix button to be on right side when not admin */}
-          <View style={[styles.btnContainer, (!ROLES.ADMIN || !ROLES.EDITOR) && styles.alignRight]}>
+          <View style={[styles.btnContainer, ROLES.USER == authState.role ? styles.alignRight : ""]}>
             <WithRole role={[ROLES.ADMIN, ROLES.EDITOR]}>
               <TouchableOpacity onPress={() => router.push("/addPost/addPost")} style={styles.btnAddPost}>
                 <AntDesign name="pluscircleo" size={24} color="white" />
@@ -62,7 +63,7 @@ export default function ProfileScreen() {
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           {displayTabContent()}
         </View>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 }

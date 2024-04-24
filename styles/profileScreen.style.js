@@ -10,6 +10,9 @@ const btnCircleStyle = {
 };
 
 export default StyleSheet.create({
+  safeAreaView: {
+    padding: SIZES.medium,
+  },
   container: {
     padding: SIZES.medium,
   },
