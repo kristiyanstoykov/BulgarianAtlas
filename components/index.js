@@ -7,7 +7,7 @@ import WithRole from "./Role/WithRole";
 import WithoutRole from "./Role/WithoutRole";
 import Tabs from "./profile/tabs/Tabs";
 import Details from "./profile/details/Details";
-import MySites from "./profile/mysites/MySites";
+import Login from "./login/Login";
 
 // common
 // import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
@@ -20,5 +20,5 @@ export {
   WithoutRole,
   Tabs,
   Details,
-  MySites,
+  Login,
 };
