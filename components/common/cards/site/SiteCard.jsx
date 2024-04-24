@@ -8,6 +8,7 @@ export default function SiteCard({
   title,
   content,
   google_maps_link,
+  distance,
   handleNavigate,
 }) {
   const plainContent = stripHtmlTags(content);
@@ -24,7 +25,9 @@ export default function SiteCard({
         />
         <Text style={styles.siteName}>{title}</Text>
         <Text style={styles.siteText}>{plainContent}</Text>
-        <Text style={styles.siteText}>Google maps: {google_maps_link}</Text>
+        {distance !== Infinity && distance != null && (
+          <Text style={styles.siteText}>Distance: {distance} km</Text>
+        )}
       </View>
     </TouchableOpacity>
   );
