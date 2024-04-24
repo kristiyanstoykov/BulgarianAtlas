@@ -39,6 +39,7 @@ const LoginTab = () => {
       />
       <TextInput
         secureTextEntry={true}
+        autoCapitalize="none"
         value={password}
         placeholder="Password"
         onChangeText={setPassword}

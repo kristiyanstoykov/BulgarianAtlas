@@ -4,6 +4,7 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,

@@ -3,14 +3,14 @@ import { COLORS, FONT, SIZES } from "../../constants";
 
 export default StyleSheet.create({
   container: {
+    marginTop: 100,
     flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
     padding: 5,
   },
   header: {
-    fontSize: 30,
+    fontSize: SIZES.xxLarge,
     fontFamily: FONT.bold,
     textAlign: "center",
     marginBottom: 40,
