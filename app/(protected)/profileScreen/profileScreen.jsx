@@ -2,9 +2,9 @@ import { AntDesign } from "@expo/vector-icons";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { useRouter } from "expo-router";
-import { Button, RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
+import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Details, Sites, Tabs, WithRole } from "../../../components";
+import { Details, MySites, Tabs, WithRole } from "../../../components";
 import { SIZES } from "../../../constants";
 import { ROLES, useAuth } from "../../../context/AuthContext";
 import { fetchMySites } from "../../../hooks/fetchMySites";
@@ -29,7 +29,7 @@ export default function ProfileScreen() {
       case "About":
         return <Details />;
       case "My sites":
-        return <Sites data={betterData} isLoading={isLoading} error={error} />;
+        return <MySites data={betterData} isLoading={isLoading} error={error} />;
     }
   };
 
