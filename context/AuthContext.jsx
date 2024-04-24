@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const response = await axios.post(
-        "http://10.0.2.2/bulgarian-atlas/wp-json/jwt-auth/v1/token",
+        "https://bulgarian-atlas.nst.bg/wp-json/jwt-auth/v1/token",
         { username, password }
       );
       const data = response.data;
