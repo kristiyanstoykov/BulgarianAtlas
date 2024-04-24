@@ -10,6 +10,7 @@ export default function Sites() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+
   useEffect(() => {
     const fetchAndProcessPosts = async () => {
       setIsLoading(true);
