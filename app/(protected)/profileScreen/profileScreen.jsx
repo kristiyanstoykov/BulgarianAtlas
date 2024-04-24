@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, Button } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { View, RefreshControl, ScrollView, Button } from "react-native";
 import { useAuth, ROLES } from "../../../context/AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SIZES } from "../../../constants";
-import axios from "axios";
 import { useRouter } from "expo-router";
-import { WithRole, Tabs, Details, MySites } from "../../../components";
+import { WithRole, Tabs, Details, Sites } from "../../../components";
+import { fetchMySites } from "../../../hooks/fetchMySites";
 
 export default function ProfileScreen() {
   const { authState, onLogout } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
   const [betterData, setBetterData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -22,45 +23,30 @@ export default function ProfileScreen() {
       case "About":
         return <Details />;
       case "My sites":
-        return (
-          <MySites
-            betterData={betterData}
-            isLoading={isLoading}
-            error={error}
-          />
-        );
+        return <Sites data={betterData} isLoading={isLoading} error={error} />;
     }
   };
 
   useEffect(() => {
-    const fetchAndProcessPosts = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts?author=${authState.user_id}&_embed`
-        );
-        const prettierData = response.data.map((post) => ({
-          postId: post.id,
-          postLink: post.link,
-          postTitle: post.title.rendered, // Assuming title is an object with a rendered property
-          postExcerpt: post.excerpt.rendered, // Same assumption as above
-          image: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? "", // Safe access to possibly undefined properties
-        }));
-        setBetterData(prettierData);
-      } catch (err) {
-        setError("Failed to fetch posts. Please try again.");
-        // TODO remove this console.log before production
-        console.log("error", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    fetchMySites(authState.user_id, setBetterData, setIsLoading, setError);
+  }, []);
 
-    fetchAndProcessPosts();
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchMySites(
+      authState.user_id,
+      setBetterData,
+      setIsLoading,
+      setError
+    ).finally(() => setRefreshing(false));
   }, []);
 
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <SafeAreaView style={{ padding: SIZES.medium }}>
         <View>
           <Button
