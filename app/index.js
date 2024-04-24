@@ -1,23 +1,10 @@
 import React from "react";
-import { Text, View, SafeAreaView, ScrollView, StyleSheet } from "react-native";
-import { Stack } from "expo-router";
-import { SIZES, FONT, COLORS, icons, images } from "../constants";
-import { Sites, ScreenHeaderBtn } from "../components";
-import { useAuth } from "../context/AuthContext";
+import { StyleSheet } from "react-native";
+import { SIZES, FONT } from "../constants";
 import Login from "../components/login/Login";
 
 export default function Home() {
-  return (
-    <Login />
-    // <SafeAreaView>
-    //   <ScrollView showsHorizontalScrollIndicator={true}>
-    //     <View style={styles.container}>
-    //       <Text style={styles.header}>Bulgarian culture</Text>
-    //       <Sites />
-    //     </View>
-    //   </ScrollView>
-    // </SafeAreaView>
-  );
+  return <Login />;
 }
 
 const styles = StyleSheet.create({
