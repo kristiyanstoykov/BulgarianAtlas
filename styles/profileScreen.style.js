@@ -1,6 +1,14 @@
 import { StyleSheet } from "react-native";
 import { COLORS, FONT, SIZES } from "../constants";
 
+const btnCircleStyle = {
+  width: 50,
+  height: 50,
+  borderRadius: 25,
+  justifyContent: "center",
+  alignItems: "center",
+};
+
 export default StyleSheet.create({
   container: {
     padding: SIZES.medium,
@@ -15,11 +23,7 @@ export default StyleSheet.create({
   },
   btnLogout: {
     backgroundColor: COLORS.warning.light,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
+    ...btnCircleStyle,
   },
   btnLogoutText: {
     color: COLORS.white,
@@ -28,11 +32,7 @@ export default StyleSheet.create({
   },
   btnAddPost: {
     backgroundColor: COLORS.primary2.light,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
+    ...btnCircleStyle,
   },
   btnAddPostText: {
     color: COLORS.white,
