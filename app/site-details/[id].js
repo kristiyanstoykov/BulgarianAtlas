@@ -82,20 +82,16 @@ const SiteDetails = () => {
         <ScrollView style={styles.scrollViewContainer}>
           <View style={styles.infoContainer}>
             <Image
-              source={
-                betterData.image
-                  ? { uri: betterData.image.replace("localhost", "10.0.2.2") }
-                  : require("../../assets/images/default-museum.jpg")
-              }
+              source={betterData.image ? { uri: betterData.image } : require("../../assets/images/default-museum.jpg")}
               style={styles.image}
             />
-            <Text style={styles.postTitle}>{betterData.postTitle}</Text>
 
             {betterData.google_maps_link && (
               <TouchableOpacity style={styles.btnMaps} onPress={handleMapLinkPress}>
                 <Text style={styles.btnMapsText}>Google Maps Link</Text>
               </TouchableOpacity>
             )}
+            <Text style={styles.postTitle}>{betterData.postTitle}</Text>
             <Text style={styles.contentText}>{betterData.postContent}</Text>
           </View>
         </ScrollView>

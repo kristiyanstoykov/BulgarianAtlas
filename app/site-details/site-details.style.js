@@ -12,7 +12,7 @@ export default StyleSheet.create({
   image: {
     width: "100%",
     height: 200,
-    borderRadius: 10,
+    borderRadius: SIZES.xSmall,
   },
   postTitle: {
     fontFamily: FONT.bold,
@@ -21,11 +21,12 @@ export default StyleSheet.create({
     paddingVertical: SIZES.small,
   },
   btnMaps: {
-    backgroundColor: COLORS.secondary.default,
+    backgroundColor: COLORS.primary2.light,
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
-    padding: 10,
+    marginTop: SIZES.xSmall,
+    padding: SIZES.xSmall,
     borderRadius: 5,
     ...SHADOWS.medium,
     shadowColor: COLORS.secondary.dark,
