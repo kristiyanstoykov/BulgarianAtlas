@@ -1,5 +1,8 @@
+import he from "he";
+
 export default function stripHtmlTags(str) {
   if (str === null || str === "") return false;
   else str = str.toString();
-  return str.replace(/<[^>]*>/g, ""); // Regular expression to remove HTML tags
+  let strippedString = str.replace(/<[^>]*>/g, "");
+  return he.decode(strippedString);
 }
