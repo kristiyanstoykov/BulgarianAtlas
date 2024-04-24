@@ -2,5 +2,12 @@ import stripHtmlTags from "./stripHtmlTags";
 import getMimeType from "./getMimeType";
 import getFileNameFromUri from "./getFileNameFromUri";
 import checkFile from "./checkFile";
+import getCoordinatesFromUrl from "./getCoordinatesFromUrl";
 
-export { stripHtmlTags, getMimeType, getFileNameFromUri, checkFile };
+export {
+  getCoordinatesFromUrl,
+  stripHtmlTags,
+  getMimeType,
+  getFileNameFromUri,
+  checkFile,
+};

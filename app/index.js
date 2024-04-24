@@ -1,18 +1,8 @@
-import { Stack } from "expo-router";
-
-import { Login, ScreenHeaderBtn, Sites } from "../components";
-import { COLORS, FONT, SIZES, icons, images } from "../constants";
+import React from "react";
+import { StyleSheet } from "react-native";
+import Login from "../components/login/Login";
+import { FONT, SIZES } from "../constants";
 
 export default function Home() {
-  return (
-    <Login />
-    // <SafeAreaView>
-    //   <ScrollView showsHorizontalScrollIndicator={true}>
-    //     <View style={styles.container}>
-    //       <Text style={styles.header}>Bulgarian culture</Text>
-    //       <Sites />
-    //     </View>
-    //   </ScrollView>
-    // </SafeAreaView>
-  );
+  return <Login />;
 }
