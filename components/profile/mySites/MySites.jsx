@@ -39,7 +39,7 @@ export default function MySites({ data, isLoading, error, onRefresh }) {
           </Swipeable>
         ))
       ) : (
-        <Text>No posts found.</Text>
+        <Text>Нямате качени постове</Text>
       )}
     </View>
   );
