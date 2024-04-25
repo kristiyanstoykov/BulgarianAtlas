@@ -20,3 +20,6 @@ android/
 
 # macOS
 .DS_Store
+
+# environment variables
+env.js
