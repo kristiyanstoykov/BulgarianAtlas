@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200, // Fixed height for images
+    height: 200,
     resizeMode: "cover",
+    marginBottom: SIZES.xSmall,
     borderRadius: SIZES.small,
   },
   textContainer: {
@@ -24,14 +25,14 @@ const styles = StyleSheet.create({
   siteName: {
     fontSize: SIZES.large,
     fontFamily: FONT.bold,
+    fontWeight: "bold",
     color: COLORS.tertiary,
+    marginBottom: SIZES.xSmall,
   },
   siteText: {
     fontSize: SIZES.small + 2,
     fontFamily: FONT.regular,
     color: COLORS.black,
-    marginTop: 3,
-    textTransform: "capitalize",
   },
 });
 

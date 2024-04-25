@@ -10,6 +10,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+android/
 
 # VS code
 .vscode/
@@ -19,3 +20,6 @@ web-build/
 
 # macOS
 .DS_Store
+
+# environment variables
+env.js

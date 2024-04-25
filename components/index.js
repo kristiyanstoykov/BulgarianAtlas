@@ -1,16 +1,16 @@
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 
 // home screen
+import Login from "../components/login/Login";
+import WithRole from "./Role/WithRole";
+import WithoutRole from "./Role/WithoutRole";
+import SiteCard from "./common/cards/site/SiteCard";
 import Sites from "./home/sites/Sites";
-
-// job details screen
-// import Company from "./jobdetails/company/Company";
-// import { default as JobTabs } from "./jobdetails/tabs/Tabs";
-// import { default as JobAbout } from "./jobdetails/about/About";
-// import { default as JobFooter } from "./jobdetails/footer/Footer";
-// import Specifics from "./jobdetails/specifics/Specifics";
+import Details from "./profile/details/Details";
+import MySites from "./profile/mySites/MySites";
+import Tabs from "./profile/tabs/Tabs";
 
 // common
 // import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
 
-export { ScreenHeaderBtn, Sites };
+export { Details, Login, MySites, ScreenHeaderBtn, SiteCard, Sites, Tabs, WithRole, WithoutRole };
