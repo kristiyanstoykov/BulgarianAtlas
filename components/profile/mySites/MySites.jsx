@@ -26,7 +26,7 @@ export default function MySites({ data, isLoading, error }) {
         <Text style={styles.error}>{error}</Text>
       ) : data && data.length > 0 ? (
         data.map((item) => (
-          <Swipeable renderRightActions={renderRightActions(item.postId)}>
+          <Swipeable key={item.postId.toString()} renderRightActions={renderRightActions(item.postId)}>
             <SiteCard
               key={item.postId.toString()}
               image={item.image}
