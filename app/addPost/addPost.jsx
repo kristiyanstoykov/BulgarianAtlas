@@ -76,7 +76,9 @@ export default function AddPost() {
   const onMapPress = (e) => {
     const coords = e.nativeEvent.coordinate;
     setMarker(coords);
-    setMapsLink(`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`);
+    setMapsLink(
+      `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`
+    );
   };
 
   const onPoiClick = (e) => {
@@ -127,13 +129,16 @@ export default function AddPost() {
     });
 
     try {
-      const response = await fetch("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/media", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${authState.token}`,
-        },
-      });
+      const response = await fetch(
+        "https://bulgarian-atlas.nst.bg/wp-json/wp/v2/media",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${authState.token}`,
+          },
+        }
+      );
       const responseJson = await response.json();
       return responseJson.id; // Or other relevant response detail
     } catch (error) {
@@ -175,10 +180,16 @@ export default function AddPost() {
     };
 
     try {
-      const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts", postData, {
-        headers,
-      });
-      Alert.alert("Success", "Успешно създаден обект", [{ text: "OK", onPress: () => router.back() }]);
+      const response = await axios.post(
+        "https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts",
+        postData,
+        {
+          headers,
+        }
+      );
+      Alert.alert("Success", "Успешно създаден обект", [
+        { text: "OK", onPress: () => router.back() },
+      ]);
     } catch (error) {
       // console.error("Грешка при създаване на обект:", error);
       Alert.alert("Грешка при качване на обект. Моля, опитайте отново.");
@@ -213,8 +224,18 @@ export default function AddPost() {
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
           headerBackVisible: false,
-          headerLeft: () => <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" handlePress={() => router.back()} />,
+          headerLeft: () => (
+            <ScreenHeaderBtn
+              iconUrl={icons.left}
+              dimension="60%"
+              handlePress={() => router.back()}
+            />
+          ),
+          headerRight: () => (
+            <ScreenHeaderBtn iconUrl={icons.bulgarianAtlas} dimension="80%" />
+          ),
           headerTitle: "Добави обект",
+          headerTitleAlign: "center",
         }}
       />
       <ScrollView style={styles.scrollView}>
@@ -222,21 +243,32 @@ export default function AddPost() {
           {image ? (
             <Image source={{ uri: image }} style={styles.image} />
           ) : (
-            <Image source={require("../../assets/images/image_placeholder.jpg")} style={styles.image} />
+            <Image
+              source={require("../../assets/images/image_placeholder.jpg")}
+              style={styles.image}
+            />
           )}
           <View style={styles.cameraBtnContainer}>
             <TouchableOpacity style={styles.cameraButton} onPress={pickImage}>
               <AntDesign name="picture" size={24} color="white" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.cameraButton} onPress={captureImage}>
+            <TouchableOpacity
+              style={styles.cameraButton}
+              onPress={captureImage}
+            >
               <AntDesign name="camerao" size={24} color="white" />
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.container}>
-          <TextInput style={styles.input} placeholder="Заглавие" value={title} onChangeText={setTitle} />
+          <TextInput
+            style={styles.input}
+            placeholder="Заглавие"
+            value={title}
+            onChangeText={setTitle}
+          />
           <TextInput
             style={styles.input}
             placeholder="Съдържание"
@@ -261,7 +293,12 @@ export default function AddPost() {
               </MapView>
             )}
           </View>
-          <TouchableOpacity style={styles.addPost} title="Добави" onPress={uploadPost} disabled={isLoading}>
+          <TouchableOpacity
+            style={styles.addPost}
+            title="Добави"
+            onPress={uploadPost}
+            disabled={isLoading}
+          >
             {isLoading ? (
               <ActivityIndicator size="small" color="#FFFFFF" />
             ) : (
