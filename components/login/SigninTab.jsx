@@ -1,6 +1,6 @@
 // SignIn.js
 import React, { useState } from "react";
-import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../context/AuthContext";
 import { useEmailValidation, usePasswordValidation, useRequiredFieldsValidation } from "./FormValidation";
 import styles from "./login.style";
@@ -15,9 +15,12 @@ const SigninTab = ({ onSuccessfulSignin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
   const { onRegister } = useAuth();
 
   const handleSignupPress = async () => {
+    setIsLoading(true);
     const fields = { name, lastname, email, password, confirmPassword };
 
     // Check all required fields
@@ -45,12 +48,15 @@ const SigninTab = ({ onSuccessfulSignin }) => {
     } catch (error) {
       console.error("Signup failed:", error);
       Alert.alert("Error", "Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <View style={styles.form}>
       <TextInput
+        autoCapitalize="none"
         value={name}
         onChangeText={setName}
         placeholder="Name"
@@ -58,6 +64,7 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         style={styles.input}
       />
       <TextInput
+        autoCapitalize="none"
         value={lastname}
         onChangeText={setLastname}
         style={styles.input}
@@ -65,6 +72,7 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         placeholderTextColor="black"
       />
       <TextInput
+        autoCapitalize="none"
         value={email}
         onChangeText={setEmail}
         style={styles.input}
@@ -72,6 +80,7 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         placeholderTextColor="black"
       />
       <TextInput
+        autoCapitalize="none"
         secureTextEntry={true}
         value={password}
         placeholder="Password"
@@ -80,6 +89,7 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         style={styles.input}
       />
       <TextInput
+        autoCapitalize="none"
         secureTextEntry={true}
         value={confirmPassword}
         placeholder="Confirm Password"
@@ -87,8 +97,8 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         placeholderTextColor="black"
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={handleSignupPress}>
-        <Text style={styles.buttonText}>SIGN UP</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSignupPress} disabled={isLoading}>
+        {isLoading ? <ActivityIndicator size="small" color="#FFFFFF" /> : <Text style={styles.buttonText}>SIGNIN</Text>}
       </TouchableOpacity>
     </View>
   );

@@ -3,9 +3,9 @@ import { COLORS, FONT, SIZES } from "../../constants";
 
 export default StyleSheet.create({
   container: {
-    marginTop: 100,
     flex: 1,
     width: "100%",
+    justifyContent: "center",
     alignItems: "center",
     padding: 5,
   },

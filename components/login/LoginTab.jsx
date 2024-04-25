@@ -1,6 +1,6 @@
 // LoginTab.js
 import React, { useState } from "react";
-import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../context/AuthContext";
 import { useEmailValidation, useRequiredFieldsValidation } from "./FormValidation";
 import styles from "./login.style";
@@ -8,14 +8,17 @@ import styles from "./login.style";
 const LoginTab = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { onLogin } = useAuth();
 
   const { validateFields, fieldErrors } = useRequiredFieldsValidation();
 
   const handleLoginPress = async () => {
+    setIsLoading(true);
     const fields = { email, password };
     if (!validateFields(fields)) {
       Alert.alert("Error", "All fields are required.");
+      setIsLoading(false);
       return;
     }
 
@@ -24,6 +27,8 @@ const LoginTab = () => {
     } catch (error) {
       Alert.alert("Login Error", "Login failed. Please try again.");
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,8 +51,12 @@ const LoginTab = () => {
         placeholderTextColor="black"
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
-        <Text style={styles.buttonText}>LOGIN</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLoginPress} disabled={isLoading}>
+        {isLoading ? (
+          <ActivityIndicator size="small" color="#FFFFFF" />
+        ) : (
+          <Text style={styles.buttonText}>LOGIN</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
