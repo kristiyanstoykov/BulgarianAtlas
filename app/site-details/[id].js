@@ -43,7 +43,7 @@ const SiteDetails = () => {
         };
         setBetterData(prettierData);
       } catch (err) {
-        setError("Failed to fetch posts. Please try again.");
+        setError("Неуспешно извличане на обекти. Моля, опитайте отново.");
       } finally {
         setIsLoading(false);
       }
@@ -55,10 +55,10 @@ const SiteDetails = () => {
   const handleMapLinkPress = () => {
     if (betterData.google_maps_link) {
       Linking.openURL(betterData.google_maps_link).catch((err) => {
-        Alert.alert("Failed to open the link", err.message);
+        Alert.alert("Неуспешно отваряне на линк", err.message);
       });
     } else {
-      Alert.alert("No link available");
+      Alert.alert("Няма наличен линк");
     }
   };
 
@@ -88,7 +88,7 @@ const SiteDetails = () => {
 
             {betterData.google_maps_link && (
               <TouchableOpacity style={styles.btnMaps} onPress={handleMapLinkPress}>
-                <Text style={styles.btnMapsText}>Google Maps Link</Text>
+                <Text style={styles.btnMapsText}>Линк към Google Maps </Text>
               </TouchableOpacity>
             )}
             <Text style={styles.postTitle}>{betterData.postTitle}</Text>

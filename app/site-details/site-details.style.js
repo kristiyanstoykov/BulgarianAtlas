@@ -33,6 +33,7 @@ export default StyleSheet.create({
   },
   btnMapsText: {
     color: COLORS.white,
+    fontSize: SIZES.medium,
   },
   contentText: {
     paddingVertical: SIZES.small,
