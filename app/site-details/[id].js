@@ -81,11 +81,7 @@ const SiteDetails = () => {
             />
           ),
           headerRight: () => (
-            <ScreenHeaderBtn
-              iconUrl={icons.bulgarianAtlas}
-              dimension="80%"
-              handlePress={() => router.replace("/")}
-            />
+            <ScreenHeaderBtn iconUrl={icons.bulgarianAtlas} dimension="80%" />
           ),
           headerTitle: `${betterData.postTitle}`,
           headerTitleAlign: "center",
