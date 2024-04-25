@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { Drawer } from "expo-router/drawer";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import { Drawer } from "expo-router/drawer";
+import React, { useContext } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useAuth } from "../../context/AuthContext"; // Make sure to have this context set up
 
 const DrawerLayout = () => {
@@ -13,8 +13,8 @@ const DrawerLayout = () => {
         <Drawer.Screen
           name="index"
           options={{
-            headerTitle: "Home",
-            drawerLabel: "Home",
+            headerTitle: "Начало",
+            drawerLabel: "Начало",
             drawerIcon: ({ size, color }) => (
               <Ionicons name="home-outline" size={size} color={color} />
             ),
@@ -23,8 +23,8 @@ const DrawerLayout = () => {
         <Drawer.Screen
           name="profileScreen/profileScreen"
           options={{
-            headerTitle: "My Profile",
-            drawerLabel: "My Profile",
+            headerTitle: "Моят профил",
+            drawerLabel: "Моят профил",
             drawerIcon: ({ size, color }) => (
               <Ionicons name="newspaper-outline" size={size} color={color} />
             ),

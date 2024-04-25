@@ -18,7 +18,7 @@ export default function ProfileScreen() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const tabs = ["My sites", "About"];
+  const tabs = ["Моите обекти", "Моят акаунт"];
   if (ROLES.USER == authState.role) {
     tabs.shift();
   }
@@ -26,9 +26,9 @@ export default function ProfileScreen() {
 
   const displayTabContent = () => {
     switch (activeTab) {
-      case "About":
+      case "Моят акаунт":
         return <Details />;
-      case "My sites":
+      case "Моите обекти":
         return <MySites data={betterData} isLoading={isLoading} error={error} />;
     }
   };

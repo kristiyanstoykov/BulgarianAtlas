@@ -51,7 +51,7 @@ export default function AddPost() {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        Alert.alert("Permission to access location was denied");
+        Alert.alert("Разрешението за достъп до местоположението беше отказано");
         return;
       }
 
@@ -86,7 +86,7 @@ export default function AddPost() {
       longitude: longitude,
     });
     setMapsLink(`https://www.google.com/maps?q=${latitude},${longitude}`);
-    Alert.alert("POI Selected", `You have selected: ${e.nativeEvent.name}`);
+    Alert.alert("Избрана точка", `Вие сте избрали: ${e.nativeEvent.name}`);
   };
 
   const pickImage = async () => {
@@ -137,8 +137,8 @@ export default function AddPost() {
       const responseJson = await response.json();
       return responseJson.id; // Or other relevant response detail
     } catch (error) {
-      console.error("Fetch upload error:", error);
-      Alert.alert("Failed to upload image. Please try again.");
+      // console.error("Fetch upload error:", error);
+      Alert.alert("Неуспешно качване на изображение. Моля, опитайте отново.");
     }
   };
 
@@ -178,10 +178,10 @@ export default function AddPost() {
       const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts", postData, {
         headers,
       });
-      Alert.alert("Success", "Post successfully created", [{ text: "OK", onPress: () => router.back() }]);
+      Alert.alert("Success", "Успешно създаден обект", [{ text: "OK", onPress: () => router.back() }]);
     } catch (error) {
-      console.error("Error creating post:", error);
-      Alert.alert("Failed to upload post. Please try again.");
+      // console.error("Грешка при създаване на обект:", error);
+      Alert.alert("Грешка при качване на обект. Моля, опитайте отново.");
     }
   };
 
@@ -191,7 +191,7 @@ export default function AddPost() {
     if (mediaId) {
       await createPostWithFeaturedImage(title, content, mediaId);
     } else {
-      console.log("Failed to upload image.");
+      // console.log("Failed to upload image.");
     }
   };
 
@@ -200,7 +200,7 @@ export default function AddPost() {
     try {
       await handleCreatePost(title, content, image);
     } catch (error) {
-      console.error("Error uploading post:", error);
+      // console.error("Error uploading post:", error);
     } finally {
       setIsLoading(false);
     }
@@ -214,7 +214,7 @@ export default function AddPost() {
           headerShadowVisible: false,
           headerBackVisible: false,
           headerLeft: () => <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" handlePress={() => router.back()} />,
-          headerTitle: "Add post",
+          headerTitle: "Добави обект",
         }}
       />
       <ScrollView style={styles.scrollView}>
