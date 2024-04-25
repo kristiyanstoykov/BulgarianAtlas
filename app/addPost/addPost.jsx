@@ -3,6 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Alert,
   Button,
   Image,
@@ -43,6 +44,8 @@ export default function AddPost() {
   const [image, setImage] = useState(null);
   const [region, setRegion] = useState(null);
   const [marker, setMarker] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -139,6 +142,7 @@ export default function AddPost() {
     }
   };
 
+  // Not needed
   checkToken = async () => {
     try {
       const headers = {
@@ -174,8 +178,6 @@ export default function AddPost() {
       const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts", postData, {
         headers,
       });
-      // TODO remove
-      //console.log("Post created successfully with ID:", response.data.id);
       Alert.alert("Success", "Post successfully created", [{ text: "OK", onPress: () => router.back() }]);
     } catch (error) {
       console.error("Error creating post:", error);
@@ -193,8 +195,15 @@ export default function AddPost() {
     }
   };
 
-  const uploadPost = () => {
-    handleCreatePost(title, content, image);
+  const uploadPost = async () => {
+    setIsLoading(true);
+    try {
+      await handleCreatePost(title, content, image);
+    } catch (error) {
+      console.error("Error uploading post:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -252,8 +261,12 @@ export default function AddPost() {
               </MapView>
             )}
           </View>
-          <TouchableOpacity style={styles.addPost} title="Добави" onPress={uploadPost}>
-            <Text style={styles.addPostText}>Добави</Text>
+          <TouchableOpacity style={styles.addPost} title="Добави" onPress={uploadPost} disabled={isLoading}>
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#FFFFFF" />
+            ) : (
+              <Text style={styles.addPostText}>Добави</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>
