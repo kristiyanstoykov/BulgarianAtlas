@@ -29,7 +29,7 @@ export default function ProfileScreen() {
       case "Моят акаунт":
         return <Details />;
       case "Моите обекти":
-        return <MySites data={betterData} isLoading={isLoading} error={error} />;
+        return <MySites data={betterData} isLoading={isLoading} error={error} onRefresh={onRefresh} />;
     }
   };
 

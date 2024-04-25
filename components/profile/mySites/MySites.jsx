@@ -6,7 +6,7 @@ import SiteCard from "../../common/cards/site/SiteCard";
 import EditButtons from "./EditButtons";
 import styles from "./mySites.style";
 
-export default function MySites({ data, isLoading, error }) {
+export default function MySites({ data, isLoading, error, onRefresh }) {
   const router = useRouter();
 
   const renderRightActions = (postId) => (progress, dragX) => {
@@ -15,7 +15,7 @@ export default function MySites({ data, isLoading, error }) {
       outputRange: [0, 0, 0, 1],
     });
 
-    return <EditButtons trans={trans} postId={postId} />;
+    return <EditButtons trans={trans} postId={postId} onRefresh={onRefresh} />;
   };
 
   return (
