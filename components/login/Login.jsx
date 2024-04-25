@@ -6,11 +6,12 @@ import {
   Platform,
   SafeAreaView,
   Text,
+  Image,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import { COLORS, FONT, SIZES } from "../../constants";
+import { COLORS, FONT, SIZES, icons } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
 import LoginTab from "./LoginTab";
 import SigninTab from "./SigninTab";
@@ -37,8 +38,18 @@ const Login = () => {
   });
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
-      <Text style={styles.header}>Bulgarian Atlas</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <View style={{ alignItems: "center" }}>
+        <Image
+          source={icons.bulgarianAtlas}
+          style={{ width: 75, height: 75 }} // Adjust size as necessary
+          resizeMode="contain"
+        />
+        <Text style={styles.header}>Bulgarian Atlas</Text>
+      </View>
       <TabSelector
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
@@ -47,7 +58,9 @@ const Login = () => {
       />
       {currentTab === "login" && <LoginTab />}
 
-      {currentTab === "signup" && <SigninTab onSuccessfulSignin={() => setCurrentTab("login")} />}
+      {currentTab === "signup" && (
+        <SigninTab onSuccessfulSignin={() => setCurrentTab("login")} />
+      )}
     </KeyboardAvoidingView>
   );
 };
