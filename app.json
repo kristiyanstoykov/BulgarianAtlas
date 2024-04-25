@@ -4,15 +4,31 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-image-picker"],
+    "plugins": [
+      "expo-router",
+      "expo-image-picker"
+    ],
     "name": "BulgarianAtlas",
     "slug": "bulgarian-atlas",
     "icon": "./assets/bulgarian-atlas-icon.png",
     "android": {
-      "permissions": ["android.permission.RECORD_AUDIO"],
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
       "package": "com.anonymous.BulgarianAtlas"
     },
     "android.config.googleMaps.apiKey": "AIzaSyCm4nvY0QCdYgB4pcdfKqKOD1LSFAQqBEo",
-    "ios.config.googleMapsApiKey": "AIzaSyCm4nvY0QCdYgB4pcdfKqKOD1LSFAQqBEo"
+    "ios.config.googleMapsApiKey": "AIzaSyCm4nvY0QCdYgB4pcdfKqKOD1LSFAQqBEo",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d4fbf9b2-ae90-47f1-a9ca-268bf44dba47"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.BulgarianAtlas"
+    }
   }
 }
