@@ -29,14 +29,18 @@ const SiteDetails = () => {
     const fetchAndProcessPosts = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts/${params.id}?_embed`);
+        const response = await axios.get(
+          `https://bulgarian-atlas.nst.bg/wp-json/wp/v2/posts/${params.id}?_embed`
+        );
 
         const prettierData = {
           postId: params.id,
           postTitle: response.data["title"]["rendered"],
           postExcerpt: stripHtmlTags(response.data["excerpt"]["rendered"]),
           postContent: stripHtmlTags(response.data["content"]["rendered"]),
-          google_maps_link: response.data["acf"] ? response.data["acf"]["google-link-field"] ?? "" : "",
+          google_maps_link: response.data["acf"]
+            ? response.data["acf"]["google-link-field"] ?? ""
+            : "",
           image: response.data._embedded["wp:featuredmedia"]
             ? response.data._embedded["wp:featuredmedia"][0].source_url
             : "",
@@ -69,7 +73,20 @@ const SiteDetails = () => {
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: true,
           headerBackVisible: false,
-          headerLeft: () => <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" handlePress={() => router.back()} />,
+          headerLeft: () => (
+            <ScreenHeaderBtn
+              iconUrl={icons.left}
+              dimension="60%"
+              handlePress={() => router.back()}
+            />
+          ),
+          headerRight: () => (
+            <ScreenHeaderBtn
+              iconUrl={icons.bulgarianAtlas}
+              dimension="80%"
+              handlePress={() => router.replace("/")}
+            />
+          ),
           headerTitle: `${betterData.postTitle}`,
           headerTitleAlign: "center",
         }}
@@ -82,12 +99,19 @@ const SiteDetails = () => {
         <ScrollView style={styles.scrollViewContainer}>
           <View style={styles.infoContainer}>
             <Image
-              source={betterData.image ? { uri: betterData.image } : require("../../assets/images/default-museum.jpg")}
+              source={
+                betterData.image
+                  ? { uri: betterData.image }
+                  : require("../../assets/images/default-museum.jpg")
+              }
               style={styles.image}
             />
 
             {betterData.google_maps_link && (
-              <TouchableOpacity style={styles.btnMaps} onPress={handleMapLinkPress}>
+              <TouchableOpacity
+                style={styles.btnMaps}
+                onPress={handleMapLinkPress}
+              >
                 <Text style={styles.btnMapsText}>Линк към Google Maps </Text>
               </TouchableOpacity>
             )}
