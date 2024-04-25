@@ -12,6 +12,7 @@
     "@react-navigation/drawer": "^6.6.15",
     "axios": "^1.6.8",
     "base-64": "^1.0.0",
+    "eas": "^0.1.0",
     "expo": "^50.0.17",
     "expo-constants": "~15.4.6",
     "expo-font": "^11.10.3",

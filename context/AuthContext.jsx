@@ -30,16 +30,28 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post("https://bulgarian-atlas.nst.bg/wp-json/jwt-auth/v1/token", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://bulgarian-atlas.nst.bg/wp-json/jwt-auth/v1/token",
+        {
+          username,
+          password,
+        }
+      );
       const data = response.data;
       if (response.status === 200) {
         const { token, profile } = response.data;
-        const { user_nicename, roles, user_first_name, user_last_name, user_email, id } = profile;
+        const {
+          user_nicename,
+          roles,
+          user_first_name,
+          user_last_name,
+          user_email,
+          id,
+        } = profile;
 
-        const userRole = roles.find((role) => Object.values(ROLES).includes(role)) || ROLES.USER;
+        const userRole =
+          roles.find((role) => Object.values(ROLES).includes(role)) ||
+          ROLES.USER;
 
         setAuthState({
           authenticated: true,
@@ -52,13 +64,17 @@ export const AuthProvider = ({ children }) => {
           token: token,
         });
       } else {
-        throw new Error("Failed to log in with status code: " + response.status);
+        throw new Error(
+          "Failed to log in with status code: " + response.status
+        );
       }
     } catch (error) {
       console.error("Login error:", error);
       Alert.alert(
         "Login Failed",
-        error.response ? stripHtmlTags(error.response.data.message) : "Login failed due to network error"
+        error.response
+          ? stripHtmlTags(error.response.data.message)
+          : "Login failed due to network error"
       );
 
       setAuthState({
@@ -96,15 +112,22 @@ export const AuthProvider = ({ children }) => {
       );
 
       if (response.status === 201 || response.status === 200) {
-        Alert.alert("Registration Successful", "You have registered successfully! Now you need to Login.");
+        Alert.alert(
+          "Registration Successful",
+          "You have registered successfully! Now you need to Login."
+        );
       } else {
-        throw new Error("Registration failed with status code: " + response.status);
+        throw new Error(
+          "Registration failed with status code: " + response.status
+        );
       }
     } catch (error) {
       console.error("Registration error:", error);
       Alert.alert(
         "Registration Failed",
-        error.response ? error.response.data.message : "An error occurred during registration"
+        error.response
+          ? error.response.data.message
+          : "An error occurred during registration"
       );
     }
   };
