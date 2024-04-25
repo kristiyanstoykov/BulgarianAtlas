@@ -1,15 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
-import {
-  View,
-  SafeAreaView,
-  ActivityIndicator,
-  Text,
-  ScrollView,
-  StyleSheet,
-  RefreshControl,
-} from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Sites } from "../../components";
-import { SIZES, FONT, COLORS, icons, images } from "../../constants";
+import { COLORS, FONT, SIZES, icons, images } from "../../constants";
 import { fetchSites } from "../../hooks/fetchSites";
 
 export default function HomeScreen() {
@@ -24,21 +16,17 @@ export default function HomeScreen() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchSites(setBetterData, setIsLoading, setError).finally(() =>
-      setRefreshing(false)
-    );
+    fetchSites(setBetterData, setIsLoading, setError).finally(() => setRefreshing(false));
   }, []);
 
   return (
     <SafeAreaView>
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         showsHorizontalScrollIndicator={false}
       >
         <View style={styles.container}>
-          <Text style={styles.header}>Bulgarian culture</Text>
+          <Text style={styles.header}>Исторически обекти</Text>
           <Sites data={betterData} isLoading={isLoading} error={error} />
         </View>
       </ScrollView>
@@ -57,6 +45,8 @@ const styles = StyleSheet.create({
   header: {
     fontSize: SIZES.xLarge,
     fontFamily: FONT.bold,
+    fontWeight: "bold",
+    paddingBottom: 20,
   },
   error: {
     color: "red",

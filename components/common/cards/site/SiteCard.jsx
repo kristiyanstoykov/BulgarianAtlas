@@ -14,7 +14,7 @@ export default function SiteCard({ image, title, content, google_maps_link, dist
         />
         <Text style={styles.siteName}>{title}</Text>
         <Text style={styles.siteText}>{plainContent}</Text>
-        {distance !== Infinity && distance != null && <Text style={styles.siteText}>Distance: {distance} km</Text>}
+        {distance !== Infinity && distance != null && <Text style={styles.siteText}>Разстояние: {distance} км</Text>}
       </View>
     </TouchableOpacity>
   );

@@ -26,7 +26,7 @@ export default function Sites({ data, isLoading, error }) {
           />
         ))
       ) : (
-        <Text>No posts found.</Text>
+        <Text>Няма намерени обекти</Text>
       )}
     </View>
   );
