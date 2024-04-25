@@ -17,7 +17,7 @@ const LoginTab = () => {
     setIsLoading(true);
     const fields = { email, password };
     if (!validateFields(fields)) {
-      Alert.alert("Error", "All fields are required.");
+      Alert.alert("Грешка", "Всички полета са задължителни!");
       setIsLoading(false);
       return;
     }
@@ -25,7 +25,7 @@ const LoginTab = () => {
     try {
       await onLogin(email, password);
     } catch (error) {
-      Alert.alert("Login Error", "Login failed. Please try again.");
+      Alert.alert("Грешка при влизане", "Неуспешно влизане. Моля, опитайте отново.");
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -36,7 +36,7 @@ const LoginTab = () => {
     <View style={styles.form}>
       <TextInput
         autoCapitalize="none"
-        placeholder="Username / Email"
+        placeholder="Потребителско име / Имейл"
         value={email}
         onChangeText={setEmail}
         placeholderTextColor="black"
@@ -46,7 +46,7 @@ const LoginTab = () => {
         secureTextEntry={true}
         autoCapitalize="none"
         value={password}
-        placeholder="Password"
+        placeholder="Парола"
         onChangeText={setPassword}
         placeholderTextColor="black"
         style={styles.input}
@@ -55,7 +55,7 @@ const LoginTab = () => {
         {isLoading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
         ) : (
-          <Text style={styles.buttonText}>LOGIN</Text>
+          <Text style={styles.buttonText}>ВЛИЗАНЕ</Text>
         )}
       </TouchableOpacity>
     </View>

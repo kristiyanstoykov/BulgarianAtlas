@@ -49,7 +49,7 @@ const TabSelector = ({ currentTab, setCurrentTab, scaleAnim, opacityAnim }) => {
     <View style={styles.tabs}>
       <Tab
         isActive={currentTab === "login"}
-        label="LOGIN"
+        label="ВЛИЗАНЕ"
         onPress={() => handleTabChange("login")}
         animatedStyle={{
           transform: [{ scale: scaleAnim.login }],
@@ -58,7 +58,7 @@ const TabSelector = ({ currentTab, setCurrentTab, scaleAnim, opacityAnim }) => {
       />
       <Tab
         isActive={currentTab === "signup"}
-        label="SIGN UP"
+        label="РЕГИСТРАЦИЯ"
         onPress={() => handleTabChange("signup")}
         animatedStyle={{
           transform: [{ scale: scaleAnim.signup }],

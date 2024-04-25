@@ -25,19 +25,19 @@ const SigninTab = ({ onSuccessfulSignin }) => {
 
     // Check all required fields
     if (!validateFields(fields)) {
-      Alert.alert("Error", "All fields are required.");
+      Alert.alert("Грешка", "Всички полета са задължителни!");
       return;
     }
 
     // Validate email
     if (!validateEmail(email)) {
-      Alert.alert("Please, enter a valid email address!", emailError);
+      Alert.alert("Моля, въведете валиден имейл адрес!", emailError);
       return;
     }
 
     // Check if passwords match
     if (!validatePasswords(password, confirmPassword)) {
-      Alert.alert("Please, match the password!", passwordError);
+      Alert.alert("Моля, сверете паролите!", passwordError);
       return;
     }
 
@@ -46,8 +46,8 @@ const SigninTab = ({ onSuccessfulSignin }) => {
       await onRegister(name, lastname, email, password);
       onSuccessfulSignin();
     } catch (error) {
-      console.error("Signup failed:", error);
-      Alert.alert("Error", "Signup failed. Please try again.");
+      console.error("Регистрацията е неуспешна:", error);
+      Alert.alert("Грешка", "Регистрацията е неуспешна. Моля, опитайте отново.");
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +59,7 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         autoCapitalize="none"
         value={name}
         onChangeText={setName}
-        placeholder="Name"
+        placeholder="Име"
         placeholderTextColor="black"
         style={styles.input}
       />
@@ -68,7 +68,7 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         value={lastname}
         onChangeText={setLastname}
         style={styles.input}
-        placeholder="Lastname"
+        placeholder="Фамилия"
         placeholderTextColor="black"
       />
       <TextInput
@@ -76,14 +76,14 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         value={email}
         onChangeText={setEmail}
         style={styles.input}
-        placeholder="Email"
+        placeholder="Имейл"
         placeholderTextColor="black"
       />
       <TextInput
         autoCapitalize="none"
         secureTextEntry={true}
         value={password}
-        placeholder="Password"
+        placeholder="Парола"
         onChangeText={setPassword}
         placeholderTextColor="black"
         style={styles.input}
@@ -92,13 +92,17 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         autoCapitalize="none"
         secureTextEntry={true}
         value={confirmPassword}
-        placeholder="Confirm Password"
+        placeholder="Потвърдете паролата"
         onChangeText={setConfirmPassword}
         placeholderTextColor="black"
         style={styles.input}
       />
       <TouchableOpacity style={styles.button} onPress={handleSignupPress} disabled={isLoading}>
-        {isLoading ? <ActivityIndicator size="small" color="#FFFFFF" /> : <Text style={styles.buttonText}>SIGNIN</Text>}
+        {isLoading ? (
+          <ActivityIndicator size="small" color="#FFFFFF" />
+        ) : (
+          <Text style={styles.buttonText}>РЕГИСТРАЦИЯ</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
