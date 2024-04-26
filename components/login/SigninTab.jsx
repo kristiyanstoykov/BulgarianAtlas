@@ -1,4 +1,3 @@
-// SignIn.js
 import React, { useState } from "react";
 import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../context/AuthContext";
@@ -67,17 +66,17 @@ const SigninTab = ({ onSuccessfulSignin }) => {
         autoCapitalize="none"
         value={lastname}
         onChangeText={setLastname}
-        style={styles.input}
         placeholder="Фамилия"
         placeholderTextColor="black"
+        style={styles.input}
       />
       <TextInput
         autoCapitalize="none"
         value={email}
         onChangeText={setEmail}
-        style={styles.input}
         placeholder="Имейл"
         placeholderTextColor="black"
+        style={styles.input}
       />
       <TextInput
         autoCapitalize="none"
