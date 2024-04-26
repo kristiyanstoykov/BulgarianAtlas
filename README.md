@@ -1,13 +1,6 @@
-# Expo Router Example
+# BulgarianAtlas
 
-Use [`expo-router`](https://docs.expo.dev/router/introduction/) to build native navigation using files in the `app/` directory.
+## Application
 
-## 🚀 How to use
-
-```sh
-npx create-expo-app -e with-router
-```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://docs.expo.dev/router/introduction/)
+You can download the apk file from the link bellow:
+https://drive.google.com/file/d/1Gx42ki0NjJv8lznhW0bRIsJEO-dC1Adr/view?usp=drive_link
